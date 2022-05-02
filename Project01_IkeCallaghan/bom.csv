@@ -1,0 +1,9 @@
+﻿Name,Quantity,Component
+"U3",1," Arduino Uno R3"
+"D5",1,"Green LED"
+"D2",1,"Red LED"
+"R2, R3",2,"330 kΩ Resistor"
+"PIR1, PIR2",2," PIR Sensor"
+"RpotControl1, RpotSpeaker2",2,"250 kΩ Potentiometer"
+"PIEZOSpeaker",1," Piezo"
+"UDisplay",1," LCD 16 x 2 "
