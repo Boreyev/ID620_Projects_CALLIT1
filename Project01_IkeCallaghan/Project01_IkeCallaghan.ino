@@ -1,8 +1,6 @@
 #include <LiquidCrystal.h>
 
-int Contrast=80;
-LiquidCrystal lcd(13, 12, 11, 10, 9, 8);   // tell the RedBoard what pins are connected to the display
-
+LiquidCrystal lcd(13, 12, 11, 10, 9, 8);   //Define LCD pins
 const int LED1 = 3;
 const int LED2 = 5;
 const int pirSensor1 = 2;
@@ -30,8 +28,8 @@ void loop()
       }  
      else if(availableSeats == 1){
          availableSeats--; 
-         lcd.clear();                      //clear the display
-         lcd.setCursor(0, 0);              //set the cursor to the 0,0 position (top left corner)
+         lcd.clear();                      
+         lcd.setCursor(0, 0);              
          lcd.print(" /)__/)  Weclome, Please wait here!");
          availableSeatsFunction();
          noSeatChime();
@@ -71,7 +69,7 @@ void setup() {
   pinMode(pirSensor1, INPUT);
   pinMode(pirSensor2, INPUT);
   analogWrite(7,Contrast);
-  lcd.begin(16, 2);                 //tell the lcd library that we are using a display that is 16 characters wide and 2 characters high
+  lcd.begin(16, 2);                 //LCD is 16x2 size
   lcd.clear();                      //clear the display
 }
 
@@ -134,7 +132,7 @@ void noSeatChime(){
 //Change available seats statement depending on current occupancy.
 void availableSeatsFunction() {
   lcd.setCursor(0, 1);                //move the cursor to the first space of the bottom row
-  lcd.print("( O .O)/ There ");       //print the number of seconds that have passed since the last reset
+  lcd.print("( O .O)/ There ");       
   if (availableSeats == 1)
   {
     lcd.print("is ");
