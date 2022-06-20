@@ -115,13 +115,13 @@ void actionTilt() {
    for (pos = 0; pos <= 180; pos += 1) { // Goes from 180 degrees to 0 degrees
     // in steps of 1 degree
     servoHead.write(pos);                // Tell servo to go to position in variable 'pos'
-    delay(30);                           // Movement Speed
+    delay(20);                           // Movement Speed
     readUV();
   }
   
   for (pos = 180; pos >= 0; pos -= 1) { 
     servoHead.write(pos);             
-    delay(30);                       
+    delay(20);                       
     readUV();
   }
 }
@@ -136,7 +136,7 @@ void actionPan() {
     for (pos = 0; pos <= 90; pos += 1) { 
       // in steps of 1 degree
       servoBase.write(pos);              
-      delay(30);                       
+      delay(20);                       
       readUV();
     }
     actionTilt();
@@ -144,21 +144,21 @@ void actionPan() {
     for (pos = 90; pos <= 180; pos += 1) { 
       // in steps of 1 degree
       servoBase.write(pos);              
-      delay(30);                      
+      delay(20);                      
       readUV();
     }
     actionTilt();
   
     for (pos = 180; pos >= 90; pos -= 1) { 
       servoBase.write(pos);             
-      delay(30);                      
+      delay(20);                      
       readUV();
     }
     actionTilt();
     
     for (pos = 90; pos >= 0; pos -= 1) { 
       servoBase.write(pos);             
-      delay(30);                       
+      delay(20);                       
       readUV();
     }
     actionTilt();
