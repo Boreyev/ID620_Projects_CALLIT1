@@ -68,11 +68,11 @@
 #define UV_METER A0
 
 //WiFi 
-const char* ssid     = "ArduinoTest";  // SSID (Name of WiFi network)
-const char* password = "Embedd32";     // Wi-Fi network password
+const char* ssid     = "NETWORK NAME";  // SSID (Name of WiFi network)
+const char* password = "PASSWORD";     // Wi-Fi network password
 
 //API
-const char* serverName = "http://maker.ifttt.com/trigger/ESP_tweetUV/with/key/gjMNzuuwZir51TNfkaLebMi4c6NnN4CRFOge8yswYZj";
+const char* serverName = "http://maker.ifttt.com/trigger/YOUR_API/with/key/YOUR_KEY";
 
 //Servos
 Servo servoBase;
