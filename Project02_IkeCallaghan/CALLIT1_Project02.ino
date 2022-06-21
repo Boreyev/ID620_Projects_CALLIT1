@@ -204,16 +204,16 @@ void spfCalc() {
 }
 
 void twitterRequest(){
-  if (uvPost >= uvThresh) {
-    HTTPClient http;
-    http.begin(serverName);
+  if (uvPost >= uvThresh) {   //Post if detected value is below the threshold
+    HTTPClient http;          
+    http.begin(serverName);   //Begin HTTP client
     Serial.println(uvPost);
     Serial.println(uvSPF);
-    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-    String httpRequestData = "value1=" + String(uvPost) + "&value2=" + String(uvSPF);           
-    int httpResponseCode = http.POST(httpRequestData);
-    Serial.print("HTTP Response code: ");
-    Serial.println(httpResponseCode);
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");  
+    String httpRequestData = "value1=" + String(uvPost) + "&value2=" + String(uvSPF);       //Assign variables to IFTTT variables    
+    int httpResponseCode = http.POST(httpRequestData);    //Make a post request
+    Serial.print("HTTP Response code: ");  
+    Serial.println(httpResponseCode);     //Print the response code (200 = posted)
     http.end();
   }
 }
