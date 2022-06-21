@@ -50,12 +50,12 @@
 //      The servo will make two 180 degree motions before calling spfCalc(), detatching servo motors, 
 //      resetting the uvPost value to 0 and sets a delay for 1 hour. 
 //
-//    RESOURCES: 
-//      https://twitter.com/DunedinUv
-//      https://ifttt.com/explore
-//      https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay
-//      Example sketches for NodeMCU ESP8266
-//      ESP8266 Board Manager Ver. 2.7.4 must be used. 
+//  RESOURCES: 
+//    https://twitter.com/DunedinUv
+//    https://ifttt.com/explore
+//    https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay
+//    Example sketches for NodeMCU ESP8266
+//    ESP8266 Board Manager Ver. 2.7.4 must be used. 
 
 #include <ESP8266WiFi.h>       
 #include <ESP8266HTTPClient.h>
