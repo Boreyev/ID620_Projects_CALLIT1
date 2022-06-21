@@ -34,6 +34,7 @@
 //         5 - 7: "apply SPF 30+ and wear protective clothing".
 //        7 - 10: "apply SPF 50, wear protective clothing and seek shade".
 //           10+: "apply SPF 50+, wear protective clothing and avoid the sun between 10am and 4pm".
+//           15+: Highest recorded UV index in New Zealand is 14.1: If this is recorded, watchdog timer is called. 
 //
 //    actionTilt()
 //      Called after every completed pan motion.
@@ -57,8 +58,8 @@
 //    Example sketches for NodeMCU ESP8266
 //    ESP8266 Board Manager Ver. 2.7.4 must be used. 
 
-#include <ESP8266WiFi.h>       
 #include <ESP8266HTTPClient.h>
+#include <ESP8266WiFi.h>       
 #include <WiFiClient.h> 
 #include <Servo.h> 
 
@@ -198,9 +199,12 @@ void spfCalc() {
           else if (uvPost >= 7 && uvPost < 10)  {
             uvSPF = "apply SPF 50, wear protective clothing and seek shade";
           }
-            else if (uvPost >= 10)  {
+            else if (uvPost >= 10 && uvPost < 17)  {
               uvSPF = "apply SPF 50+, wear protective clothing and avoid the sun between 10am and 4pm";
             }
+             else if (uvPost > 15)  {
+              ESP.restart();   //NodeMCU library uses ESP.restart() instead of wdt_enable()
+             }
 }
 
 void twitterRequest(){
