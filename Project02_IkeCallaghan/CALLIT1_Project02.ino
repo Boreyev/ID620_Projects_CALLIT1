@@ -34,6 +34,7 @@
 //         5 - 7: "apply SPF 30+ and wear protective clothing".
 //        7 - 10: "apply SPF 50, wear protective clothing and seek shade".
 //           10+: "apply SPF 50+, wear protective clothing and avoid the sun between 10am and 4pm".
+//           15+:  Calls watchdog timer to restart device, highest recorded NZ UV index is 14.6.
 //
 //    actionTilt()
 //      Called after every completed pan motion.
