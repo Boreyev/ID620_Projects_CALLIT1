@@ -34,7 +34,6 @@
 //         5 - 7: "apply SPF 30+ and wear protective clothing".
 //        7 - 10: "apply SPF 50, wear protective clothing and seek shade".
 //           10+: "apply SPF 50+, wear protective clothing and avoid the sun between 10am and 4pm".
-//           15+: Highest recorded UV index in New Zealand is 14.1: If this is recorded, watchdog timer is called. 
 //
 //    actionTilt()
 //      Called after every completed pan motion.
@@ -51,15 +50,14 @@
 //      The servo will make two 180 degree motions before calling spfCalc(), detatching servo motors, 
 //      resetting the uvPost value to 0 and sets a delay for 1 hour. 
 //
-//  RESOURCES: 
-//    https://twitter.com/DunedinUv
-//    https://ifttt.com/explore
-//    https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay
-//    Example sketches for NodeMCU ESP8266
-//    ESP8266 Board Manager Ver. 2.7.4 must be used. 
+//    RESOURCES: 
+//      https://twitter.com/DunedinUv
+//      https://ifttt.com/explore
+//      https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay
+//      Example sketches for NodeMCU ESP8266
 
-#include <ESP8266HTTPClient.h>
 #include <ESP8266WiFi.h>       
+#include <ESP8266HTTPClient.h>
 #include <WiFiClient.h> 
 #include <Servo.h> 
 
@@ -70,7 +68,7 @@
 
 //WiFi 
 const char* ssid     = "NETWORK NAME";  // SSID (Name of WiFi network)
-const char* password = "PASSWORD";     // Wi-Fi network password
+const char* password = "PASSWORD";      // Wi-Fi network password
 
 //API
 const char* serverName = "http://maker.ifttt.com/trigger/YOUR_API/with/key/YOUR_KEY";
@@ -92,11 +90,11 @@ void setup() {
   delay(10);
   Serial.println('\n');
   
-  WiFi.begin(ssid, password);             // Connect to network
+  WiFi.begin(ssid, password);               // Connect to network
   Serial.print("Connecting to ");
   Serial.print(ssid);
 
-  while (WiFi.status() != WL_CONNECTED) { // Wait for connection
+  while (WiFi.status() != WL_CONNECTED) {   // Wait for connection
     delay(500);
     Serial.print('.');
   }
@@ -105,6 +103,8 @@ void setup() {
   Serial.println("Connection established!");  
   Serial.print("IP address:\t");
   Serial.println(WiFi.localIP());         // Print the localIP (Connection verification)
+  WiFi.setAutoReconnect(true);            // Set WiFi auto reconnect. 
+  WiFi.persistent(true);
 }
 
 void loop() { 
@@ -114,10 +114,10 @@ void loop() {
 //***FUNCTIONS***
 
 void actionTilt() {
-   for (pos = 0; pos <= 180; pos += 1) { // Goes from 180 degrees to 0 degrees
+   for (pos = 0; pos <= 180; pos += 1) {  // Goes from 180 degrees to 0 degrees
     // in steps of 1 degree
-    servoHead.write(pos);                // Tell servo to go to position in variable 'pos'
-    delay(20);                           // Movement Speed
+    servoHead.write(pos);                 // Tell servo to go to position in variable 'pos'
+    delay(20);                            // Movement Speed
     readUV();
   }
   
@@ -168,10 +168,10 @@ void actionPan() {
   
   spfCalc();
   twitterRequest();
-  servoBase.detach(); //Servos were making noise when idling, detatch them while not detecting UV.
+  servoBase.detach();           //Servos were making noise when idling, detatch them while not detecting UV.
   servoHead.detach();
   uvPost = 0;
-  delay(1 * 60 * 1000UL); //1 Minute Delay (For testing purposes)
+  delay(1 * 60 * 1000UL);       //1 Minute Delay (For testing purposes)
 }
 
 void readUV() {
@@ -179,7 +179,7 @@ void readUV() {
   float uvVolt = uvRead * (5.0 / 1023.0);
   float uvIndex = uvVolt/.1;
   
-  if (uvIndex > uvPost) { //Set uvPost value to highest attained value during capture phase. 
+  if (uvIndex > uvPost) {       //Set uvPost value to highest attained value during capture phase. 
     uvPost = uvIndex;
     Serial.print("UV Index: ");         
     Serial.println(uvPost);  
@@ -204,20 +204,21 @@ void spfCalc() {
             }
              else if (uvPost > 15)  {
               ESP.restart();   //NodeMCU library uses ESP.restart() instead of wdt_enable()
+                               //Next addition would be email notification if NODEMCU has to restart.
              }
 }
 
 void twitterRequest(){
-  if (uvPost >= uvThresh) {   //Post if detected value is below the threshold
+  if (uvPost >= uvThresh) {                                                             //Post if detected value is below the threshold
     HTTPClient http;          
-    http.begin(serverName);   //Begin HTTP client
+    http.begin(serverName);                                                             //Begin HTTP client
     Serial.println(uvPost);
     Serial.println(uvSPF);
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");  
-    String httpRequestData = "value1=" + String(uvPost) + "&value2=" + String(uvSPF);       //Assign variables to IFTTT variables    
+    String httpRequestData = "value1=" + String(uvPost) + "&value2=" + String(uvSPF);   //Assign variables to IFTTT variables    
     int httpResponseCode = http.POST(httpRequestData);    //Make a post request
     Serial.print("HTTP Response code: ");  
-    Serial.println(httpResponseCode);     //Print the response code (200 = posted)
+    Serial.println(httpResponseCode);                                                   //Print the response code (200 = posted)
     http.end();
   }
 }
