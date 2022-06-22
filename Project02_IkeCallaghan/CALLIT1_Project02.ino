@@ -23,6 +23,9 @@
 //    WifiClient.h
 //    Servo.h
 //
+//  NOTE:
+//    The ESP8266 driver ver. required to run this script is 2.7.4
+//
 //------------------------------------------------------------------------------------------------------------
 //  FUNCTIONS:
 //
