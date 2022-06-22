@@ -2,11 +2,13 @@
 //  AUTHOR: Ike Callaghan
 //  DATE: 21/06/2022
 //
+//------------------------------------------------------------------------------------------------------------
 //  PURPOSE:
 //    This script is designed to routinely measure the UV index rating of the local area.
 //    It will then post the UV rating, along with health and safety recommendations to 
 //    '@DunedinUV' on Twitter.com, using the ifttt Applet platform. 
 //
+//------------------------------------------------------------------------------------------------------------
 //  COMPONENTS:
 //    Arduino NODEMCU ESP8266
 //    9g micro servos
@@ -14,12 +16,14 @@
 //    XC4518 Ultraviolet Sensor
 //    Jumper leads
 //
+//------------------------------------------------------------------------------------------------------------
 //  INCLUDED FILES:
 //    ESP8266Wifi.h
 //    ESP8266HTTPClient.h
 //    WifiClient.h
 //    Servo.h
 //
+//------------------------------------------------------------------------------------------------------------
 //  FUNCTIONS:
 //
 //    readUV()
@@ -51,11 +55,15 @@
 //      The servo will make two 180 degree motions before calling spfCalc(), detatching servo motors, 
 //      resetting the uvPost value to 0 and sets a delay for 1 hour. 
 //
-//    RESOURCES: 
-//      https://twitter.com/DunedinUv
-//      https://ifttt.com/explore
-//      https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay
-//      Example sketches for NodeMCU ESP8266
+//------------------------------------------------------------------------------------------------------------
+//
+//  RESOURCES: 
+//    https://twitter.com/DunedinUv
+//    https://ifttt.com/explore
+//    https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay
+//    Example sketches for NodeMCU ESP8266
+//
+//------------------------------------------------------------------------------------------------------------
 
 #include <ESP8266WiFi.h>       
 #include <ESP8266HTTPClient.h>
@@ -112,7 +120,9 @@ void loop() {
   actionPan();
 }
 
-//***FUNCTIONS***
+//------------------------------------------------------------------------------------------------------------
+//  FUNCTIONS
+//------------------------------------------------------------------------------------------------------------
 
 void actionTilt() {
    for (pos = 0; pos <= 180; pos += 1) {  // Goes from 180 degrees to 0 degrees
