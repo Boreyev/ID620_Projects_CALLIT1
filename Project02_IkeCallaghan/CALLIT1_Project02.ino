@@ -91,7 +91,7 @@ int pos = 0;
 float uvRead = 0;
 float uvIndex = 0;
 float uvPost = 0;
-float uvThresh = 0.30;
+float uvThresh = 0.30;    //At 0.3 for testing purposes. 
 String uvSPF = "";
 
 void setup() {
